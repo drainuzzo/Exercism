@@ -84,4 +84,10 @@ func RemoveItem(slice []int, index int) []int {
 		return slice
 	}
 	return sliceN
+
+	//migliore
+	// if index < 0 || index > len(slice)-1 {
+	// 	return slice
+	// }
+	// return append(slice[:index], slice[index+1:]...)
 }

@@ -39,6 +39,7 @@ func HasPassed(date string) bool {
 	//ex: July 25, 2019 13:45:00
 	layout := "January 2, 2006 15:04:05"
 	t, _ := time.Parse(layout, date)
+	//t := Schedule(date) //meglio
 	//fmt.Println(t.Before(time.Now()))
 	return t.Before(time.Now())
 
@@ -60,10 +61,11 @@ func IsAfternoonAppointment(date string) bool {
 func Description(date string) string {
 	//Description("7/25/2019 13:45:00")
 	// Output: "You have an appointment on Thursday, July 25, 2019, at 13:45."
-	layout := "1/02/2006 15:04:05"
+	layout := "1/2/2006 15:04:05"
 	t, _ := time.Parse(layout, date)
 	s := t.Format("Monday, January 2, 2006, at 15:04")
 	return "You have an appointment on " + s + "."
+	//return t.Format("You have an appointment on Monday, January 2, 2006, at 15:04.")
 }
 
 // AnniversaryDate returns a Time with this year's anniversary
@@ -74,4 +76,5 @@ func AnniversaryDate() time.Time {
 	t, _ := time.Parse(layout, date)
 	//fmt.Println(t)
 	return t
+	//return time.Date(curYear, 9, 15, 0, 0, 0, 0, time.UTC)
 }
