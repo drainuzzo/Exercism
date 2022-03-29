@@ -73,19 +73,19 @@ func RemoveItem(bill, units map[string]int, item, unit string) bool {
 	uni, oku := units[unit]
 	curr, okb := bill[item]
 	qty := curr - uni
-	fmt.Println("qty", qty)
+	//fmt.Println("qty", qty)
 	if oku == false {
 		return false
 	}
 	if okb == false {
 		return false
 	}
-	fmt.Println("bill before assign", bill)
+	//fmt.Println("bill before assign", bill)
 	if qty < 0 {
 		return false
 	} else if qty == 0 {
 		delete(bill, item)
-		fmt.Println("bill after assign", bill)
+		//fmt.Println("bill after assign", bill)
 	} else {
 		//fmt.Println("qty before assign", qty)
 		//fmt.Println("bill before assign", bill)
