@@ -12,16 +12,18 @@ func main() {
 	fmt.Println(bill)
 	// Output: map[]
 
-	ok := AddItem(bill, units, "carrot", "dozen")
-	fmt.Println(ok)
+	ok := AddItem(bill, units, "tomato", "half_of_a_dozen")
+	fmt.Println("AddItem1", ok)
 	// Output: true (since dozen is a valid unit)
+	//ok = AddItem(bill, units, "tomato", "quarter_of_a_dozen")
+	//fmt.Println("AddItem2", ok)
 
-	ok2 := RemoveItem(bill, units, "carrot", "dozen")
-	fmt.Println(ok2)
+	ok2 := RemoveItem(bill, units, "tomato", "half_of_a_dozen")
+	fmt.Println("RemoveItem", ok2)
 	// Output: false (because there are no carrots in the bill)
 
-	cill := map[string]int{"carrot": 12, "grapes": 3}
-	qty, ok := GetItem(cill, "carrot")
+	bill = map[string]int{"carrot": 12, "grapes": 3}
+	qty, ok := GetItem(bill, "carrot")
 	fmt.Println(qty)
 	// Output: 12
 	fmt.Println(ok)
@@ -50,37 +52,47 @@ func NewBill() map[string]int {
 
 // AddItem adds an item to customer bill.
 func AddItem(bill, units map[string]int, item, unit string) bool {
-	bill = NewBill()
-	units = Units()
-	_, ok := units[unit]
+	//bill = NewBill()
+	//units = Units()
+	u, ok := units[unit]
 	if ok == true {
-		if bill[item] == units[unit] {
-			bill[item] += units[unit]
-		} else {
-			bill[item] = units[unit]
-		}
+		//fmt.Println("bill", bill)
+		//fmt.Println("units", units)
+		//fmt.Println("before add", bill)
+		bill[item] += u
+		//fmt.Println("after add", bill)
+
 	}
-	//fmt.Println(bill)
+	//fmt.Println("AddItem, final", bill)
 	return ok
 
 }
 
 // RemoveItem removes an item from customer bill.
 func RemoveItem(bill, units map[string]int, item, unit string) bool {
-	units = Units()
-	_, oku := units[unit]
-	_, okb := bill[item]
-	qty, _ := GetItem(bill, item)
-	//return oku && oku
-	if (okb == false || oku == false) && qty < 0 {
+	uni, oku := units[unit]
+	curr, okb := bill[item]
+	qty := curr - uni
+	fmt.Println("qty", qty)
+	if oku == false {
+		return false
+	}
+	if okb == false {
+		return false
+	}
+	fmt.Println("bill before assign", bill)
+	if qty < 0 {
 		return false
 	} else if qty == 0 {
 		delete(bill, item)
-		return true
+		fmt.Println("bill after assign", bill)
 	} else {
-		bill[item]--
-		return true
+		//fmt.Println("qty before assign", qty)
+		//fmt.Println("bill before assign", bill)
+		bill[item] = qty
+		//fmt.Println("bill after assign", bill)
 	}
+	return true
 }
 
 // GetItem returns the quantity of an item that the customer has in his/her bill.
