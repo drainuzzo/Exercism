@@ -7,7 +7,7 @@ import (
 
 func main() {
 	// twentyFodderNoError says there are 20.0 fodder
-	//fodder, err := DivideFood(nil, 10)
+	//fodder, err := DivideFood(ErrScaleMalfunction, 10)
 	// fodder == 2.0
 	// err == nil
 	//fmt.Println("fodder: ", fodder, "err= ", err)
